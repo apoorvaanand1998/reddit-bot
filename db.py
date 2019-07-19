@@ -1,5 +1,5 @@
 import psycopg2
-from db_con import config
+from utils import config
  
 def create_table():
     command = """CREATE TABLE IF NOT EXISTS subdata (
@@ -80,3 +80,4 @@ def youtu_results():
     finally:
         if conn is not None:
             conn.close()
+    return results 
