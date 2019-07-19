@@ -61,4 +61,22 @@ def upd_proc(id):
     finally:
         if conn is not None:
             conn.close()
-                   
+
+def youtu_results():
+    command = """SELECT * FROM subdata 
+                   WHERE processed = false
+                   AND url like '%youtu%'"""
+    conn = None
+    try:
+        params = config()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+
+        cur.execute(command)
+        results = cur.fetchall()
+        cur.close()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
