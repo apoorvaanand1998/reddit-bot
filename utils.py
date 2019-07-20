@@ -28,3 +28,19 @@ def get_yt_id(url):
         return query.path[1:]
     else:
         raise ValueError
+
+def ch_epoch(seconds):
+    if seconds < 60:
+        return (str(seconds) + ' seconds')
+    elif seconds < 60 * 60:
+        return (str(seconds // 60) + ' minutes')
+    elif seconds < 24 * 60 * 60:
+        return (str(seconds // (60 * 60)) + ' hours')
+    elif seconds < 30 * 24 * 60 * 60:
+        return (str(seconds // (24 * 60 * 60)) + ' days')
+    elif seconds < 12 * 30 * 24 * 60 * 60:
+        return (str(seconds // (30 * 24 * 60 * 60)) + ' months')
+    else:
+        return (str(seconds // (12 * 30 * 24 * 60 * 60)) + ' years')
+
+
