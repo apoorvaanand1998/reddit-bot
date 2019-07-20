@@ -32,16 +32,25 @@ def get_yt_id(url):
 def ch_epoch(seconds):
     seconds = int(seconds)
     if seconds < 60:
-        return (str(seconds) + ' seconds')
+        calc = seconds
+        result = str(calc) + ' second'
     elif seconds < 60 * 60:
-        return (str(seconds // 60) + ' minutes')
+        calc = seconds // 60
+        result = str(calc) + ' minute'
     elif seconds < 24 * 60 * 60:
-        return (str(seconds // (60 * 60)) + ' hours')
+        calc = seconds // (60 * 60)
+        result = str(calc) + ' hour'
     elif seconds < 30 * 24 * 60 * 60:
-        return (str(seconds // (24 * 60 * 60)) + ' days')
+        calc = seconds // (24 * 60 * 60)
+        result = str(calc) + ' day'
     elif seconds < 12 * 30 * 24 * 60 * 60:
-        return (str(seconds // (30 * 24 * 60 * 60)) + ' months')
+        calc = seconds // (30 * 24 * 60 * 60)
+        result = str(calc) + ' month'
     else:
-        return (str(seconds // (12 * 30 * 24 * 60 * 60)) + ' years')
+        calc = seconds // (12 * 30 * 24 * 60 * 60)
+        result = str(calc) + ' year'
+
+    return result if calc == 1 else (result + 's')
+
 
 
