@@ -30,6 +30,7 @@ def get_yt_id(url):
         raise ValueError
 
 def ch_epoch(seconds):
+    seconds = int(seconds)
     if seconds < 60:
         return (str(seconds) + ' seconds')
     elif seconds < 60 * 60:

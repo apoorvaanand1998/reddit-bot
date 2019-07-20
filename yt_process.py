@@ -5,11 +5,11 @@ from utils import ch_epoch
 def get_yt_result(yt_id):
     reddit = praw.Reddit('RepostBot')
     search_list = list(reddit.subreddit('all').search('url:'+yt_id, limit=5))
-
-    return False if not search_list  ## checks if list is empty
+    if not search_list:
+        return False     ## checks if list is empty
     
     comment = ['Anyone seeking more info might also check here:\n',
-               'title | points | age | /r/ | comnts',
+               'title | points | age | /r/ | comments',
                ':--|:--|:--|:--|:--']
     for submission in search_list:
         comment.append('[' + submission.title + '](http://www.reddit.com' +
