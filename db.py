@@ -1,6 +1,7 @@
 import psycopg2
 from utils import config
- 
+
+
 def create_table():
     command = """CREATE TABLE IF NOT EXISTS subdata (
                    id VARCHAR(10) PRIMARY KEY,
@@ -8,7 +9,7 @@ def create_table():
                    url TEXT,
                    permalink TEXT,
                    processed BOOL
-               )"""                  
+               )"""
     conn = None
     try:
         params = config()
@@ -23,6 +24,7 @@ def create_table():
     finally:
         if conn is not None:
             conn.close()
+
 
 def insert_sub(id, is_self, url, permalink, processed=False):
     command = """INSERT INTO subdata VALUES (%s, %s, %s, %s, %s)
@@ -43,6 +45,7 @@ def insert_sub(id, is_self, url, permalink, processed=False):
         if conn is not None:
             conn.close()
 
+
 def upd_proc(id):
     command = """UPDATE subdata
                    SET processed = TRUE
@@ -53,7 +56,7 @@ def upd_proc(id):
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
 
-        cur.execute(command, [id,])
+        cur.execute(command, [id])
         cur.close()
         conn.commit()
     except (Exception, psycopg2.DatabaseError) as error:
@@ -61,6 +64,7 @@ def upd_proc(id):
     finally:
         if conn is not None:
             conn.close()
+
 
 def youtu_results():
     command = """SELECT * FROM subdata 
@@ -80,4 +84,4 @@ def youtu_results():
     finally:
         if conn is not None:
             conn.close()
-    return results 
+    return results
