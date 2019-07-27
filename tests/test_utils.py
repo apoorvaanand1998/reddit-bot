@@ -31,3 +31,36 @@ def test_get_yt_id():
         )
         == "rTHlyTphWP0"
     )
+
+    with pytest.raises(ValueError):
+        get_yt_id("http://www.reddit.com")
+
+
+def test_config(tmpdir):
+    ini = tmpdir.mkdir("db").join("database.ini")
+    ini.write(
+        """
+        [postgresql]
+        host=localhost
+        database=dbname
+        user=username
+        password=mypassword
+        """
+    )
+    conf_d = config(filename=ini.dirname + "/database.ini")
+
+    assert conf_d["host"] == "localhost"
+    assert conf_d["database"] == "dbname"
+    assert conf_d["user"] == "username"
+    assert conf_d["password"] == "mypassword"
+
+    ini.write(
+        """
+        [posgersql]
+        host=localhost
+        """
+    )
+
+    with pytest.raises(Exception) as e:
+        conf_d = config(filename=ini.dirname + "/database.ini")
+    assert str(e.value) == "Section postgresql not found in the {0} file".format(ini.dirname + "/database.ini")
