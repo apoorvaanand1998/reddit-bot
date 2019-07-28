@@ -21,4 +21,3 @@ def repost_bot():
         if res:
             post_result(sub_id, str(res))
         upd_proc(sub_id)
-
