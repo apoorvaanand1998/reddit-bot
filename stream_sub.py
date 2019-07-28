@@ -1,5 +1,7 @@
 import praw
 from db import *
+from repost_bot import *
+
 
 create_table()
 
@@ -10,3 +12,5 @@ for submission in reddit.subreddit("AABotTesting").stream.submissions():
 
     if submission.is_self:
         upd_proc(submission.id)
+
+    repost_bot()
