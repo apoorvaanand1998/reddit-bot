@@ -63,4 +63,6 @@ def test_config(tmpdir):
 
     with pytest.raises(Exception) as e:
         conf_d = config(filename=ini.dirname + "/database.ini")
-    assert str(e.value) == "Section postgresql not found in the {0} file".format(ini.dirname + "/database.ini")
+    assert str(e.value) == "Section postgresql not found in the {0} file".format(
+        ini.dirname + "/database.ini"
+    )
