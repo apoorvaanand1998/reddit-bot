@@ -37,7 +37,7 @@ def get_yt_result(yt_id):
     return comment
 
 
-def post_yt_result(sub_id, res):
+def post_result(sub_id, res):
     reddit = praw.Reddit("RepostBot")
     submission = reddit.submission(id=sub_id)
     submission.reply(res)
